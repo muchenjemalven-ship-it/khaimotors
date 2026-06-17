@@ -26,10 +26,9 @@ SECRET_KEY = 'django-insecure-l(-rdaq(+=va*@)ajcdfq6@a-c_p!j7zum6qnlc-l5dq4xmjv6
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
+    "khaimotors.onrender.com",
     "localhost",
-    "khaimotors.co.uk",
-    "www.khaimotors.co.uk",
+    "127.0.0.1",
 ]
 
 # Application definition
@@ -40,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'djanALLOgo.contrib.messages',
     'django.contrib.staticfiles',
 ]
 
