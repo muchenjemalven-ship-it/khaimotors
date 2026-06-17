@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Khai Motors</title>
+
+    <style>
+        body{
+            font-family:Arial, sans-serif;
+            background:#f4f4f4;
+            margin:0;
+            padding:0;
+        }
+
+        header{
+            background:#111;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        header h1{
+            margin:0;
+        }
+
+        header p{
+            margin:5px 0 15px;
+        }
+
+        nav a{
+            color:#d4af37;
+            text-decoration:none;
+            margin:0 15px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            color:white;
+        }
+.active{
+    color:#d4af37 !important;
+    font-weight:bold;
+    border-bottom:2px solid #d4af37;
+    padding-bottom:5px;
+}
+.social-icons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:25px;
+}
+
+.social-icons a{
+    font-size:40px;
+    text-decoration:none;
+}
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:40px;
+}
+
+.company-card{
+    max-width:800px;
+    margin:50px auto;
+    padding:40px;
+
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,0.2);
+
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+
+    text-align:center;
+}
+
+.company-card h2{
+    color:#0f172a;
+    margin-bottom:25px;
+}
+
+.company-card p{
+    margin:12px 0;
+    font-size:17px;
+}
+.about-banner{
+    height:400px;
+    background-image:url('/media/vehicles/truckkhai.jpeg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    position:relative;
+    width:100%;
+    margin:0;
+}
+   
+.about-banner::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+}
+
+.banner-content{
+    position:relative;
+    z-index:1;
+}
+
+.banner-content h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.banner-content p{
+    font-size:22px;
+}
+body {
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+}
+
+body{
+    margin:0;
+}
+
+nav a{
+    text-decoration:none;
+}
+
+/* PASTE NEW CSS BELOW HERE */
+
+.parts-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.part-card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.part-card:hover{
+    transform:translateY(-5px);
+}
+
+/* END OF NEW CSS */
+
+    </style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+    <h1>KHAI MOTORS</h1>
+    <p>Quality Vehicles. Trusted Service.</p>
+
+   <nav>
+    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+        Home
+    </a>
+
+    <a href="{% url 'vehicles' %}" class="{% if request.resolver_match.url_name == 'vehicles' %}active{% endif %}">
+        Vehicles
+    </a>
+
+    <a href="{% url 'sold_vehicles' %}" class="{% if request.resolver_match.url_name == 'sold_vehicles' %}active{% endif %}">
+        Sold Vehicles
+    </a>
+
+    <a href="{% url 'parts' %}" class="{% if request.resolver_match.url_name == 'parts' %}active{% endif %}">
+        Parts
+    </a>
+
+    <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+        About Us
+    </a>
+</nav>
+</header>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

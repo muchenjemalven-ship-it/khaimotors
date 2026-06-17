@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.enquiry-card{
+    max-width:600px;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    margin-top:30px;
+}
+
+.enquiry-card input,
+.enquiry-card textarea{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+.enquiry-card button{
+    background:#d4af37;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+</style>
+<div class="container" style="padding:40px;">
+
+    <h1>{{ vehicle.title }}</h1>
+
+    {% if vehicle.image %}
+  <img id="main-image"
+     src="{{ vehicle.image.url }}"
+             alt="{{ vehicle.title }}"
+             style="width:100%; max-width:800px; border-radius:10px;">
+    {% endif %}
+<div class="gallery" style="margin-top:20px;">
+
+    {% for image in vehicle.images.all %}
+
+        <img src="{{ image.image.url }}"
+             onclick="document.getElementById('main-image').src=this.src"
+             style="
+             width:150px;
+             height:100px;
+             object-fit:cover;
+             margin:8px;
+             cursor:pointer;
+             border-radius:8px;
+             border:2px solid #ddd;
+             ">
+
+    {% endfor %}
+
+</div>
+    <br><br>
+
+    <h2>£{{ vehicle.price }}</h2>
+
+    <p><strong>Year:</strong> {{ vehicle.year }}</p>
+    <p><strong>Mileage:</strong> {{ vehicle.mileage }}</p>
+    <p><strong>Fuel:</strong> {{ vehicle.fuel }}</p>
+    <p><strong>Transmission:</strong> {{ vehicle.transmission }}</p>
+
+    <hr>
+
+    <h3>Description</h3>
+    {{ vehicle.description|linebreaks }}
+<hr>
+    {% if vehicle.status == 'available' %}
+<a href="https://wa.me/447756030909?text=Hello%20Khai%20Motors,%20I'm%20interested%20in%20the%20{{ vehicle.title }}.%20Could%20you%20provide%20more%20information?"
+   style="
+   display:inline-block;
+   background:#25D366;
+   color:white;
+   padding:12px 24px;
+   text-decoration:none;
+   border-radius:8px;
+   font-weight:bold;
+   margin-top:15px;
+">
+   Enquire on WhatsApp
+   </a>
+   <br><br>
+
+   <a href="tel:+447756030909"
+   style="
+   display:inline-block;
+   background:#333;
+   color:white;
+   padding:12px 24px;
+   text-decoration:none;
+   border-radius:8px;
+   font-weight:bold;
+">
+   📞 Call Now
+</a>
+
+<h3>Send an Enquiry</h3>
+
+<div class="enquiry-card">
+<form method="post">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Your Name" required><br><br>
+
+    <input type="email" name="email" placeholder="Your Email" required><br><br>
+
+    <input type="text" name="phone" placeholder="Phone Number"><br><br>
+
+   <textarea name="message" rows="5">
+I am interested in the {{ vehicle.title }}. Please contact me with more information.
+</textarea>
+
+    <button type="submit">Send Enquiry</button>
+</form>
+</div>
+{% else %}
+<h3 style="color:red;">SOLD</h3>
+{% endif %}
+<br><br>
+
+    <a href="{% url 'vehicles' %}">
+        ← Back to Vehicles
+    </a>
+
+</div>
+
+{% endblock %}

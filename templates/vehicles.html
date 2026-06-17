@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicles - Khai Motors</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            margin:0;
+            padding:0;
+        }
+
+        .container{
+            max-width:1400px;
+            margin:auto;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .vehicle-grid{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:25px;
+        }
+
+        .vehicle-card{
+            background:white;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            display:flex;
+            align-items:center;
+            gap:30px;
+            padding:25px;
+            margin-bottom:25px
+        }
+
+        .vehicle-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .vehicle-image{
+    height:300px;
+    width:450px;
+    object-fit:cover; 
+    border-radius:10px; 
+}
+
+.vehicle-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.3s;
+}
+
+.vehicle-card:hover .vehicle-image img{
+    transform:scale(1.05);
+}
+
+        .vehicle-info{
+            padding:20px;
+        }
+
+        .price{
+            color:#d4af37;
+            font-size:32px;
+            font-weight:bold;
+            margin: 10px 0;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#d4af37;
+            color:white;
+            text-decoration:none;
+            padding:10px 20px;
+            border-radius:5px;
+            margin-top:10px;
+        }
+.vehicle-image img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+.active{
+    color:#d4af37 !important;
+    font-weight:bold;
+    border-bottom:2px solid #d4af37;
+    padding-bottom:5px;
+}
+header{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+header h1{
+    margin:0;
+}
+
+header p{
+    margin:5px 0 15px;
+}
+
+nav a{
+    color:#d4af37;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:white;
+}
+.view-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    background:#d4af37;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+}
+.search-form{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.search-form input{
+    width:300px;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.search-form button{
+    padding:12px 20px;
+    background:#222;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>KHAI MOTORS</h1>
+    <p>Quality Vehicles. Trusted Service.</p>
+    <nav>
+    <a href="/">Home</a>
+    <a href="/vehicles/">Vehicles</a>
+    <a href="/sold-vehicles/">Sold Vehicles</a>
+    <a href="/parts/">Parts</a>
+    <a href="/about/">About Us</a>
+</nav>
+</header>
+
+<div class="container">
+
+<h1>Available Vehicles</h1>
+
+<form method="GET" class="search-form">
+    <input
+        type="text"
+        name="q"
+        placeholder="Search vehicles..."
+        value="{{ query }}"
+    >
+    <button type="submit">Search</button>
+</form>
+<div class="vehicle-grid">
+
+   {% for vehicle in vehicles %}
+<div class="vehicle-card">
+<div class="vehicle-image">
+    <a href="{% url 'vehicle_detail' vehicle.id %}">
+     
+   {% with vehicle.images.first as image %}
+    {% if image %}
+        <img src="{{ image.image.url }}" alt="{{ vehicle.title }}">
+    {% endif %}
+{% endwith %}
+    </a>
+</div>
+
+<div class="vehicle-info">
+    <h2>
+        <a href="{% url 'vehicle_detail' vehicle.id %}">
+            {{ vehicle.title }}
+        </a>
+    </h2>
+
+        <p class="price">
+            {{ vehicle.price }}
+        </p>
+
+        <p>
+            {{ vehicle.fuel }} •
+            {{ vehicle.transmission }} •
+            {{ vehicle.mileage }} miles
+        </p>
+<a href="{% url 'vehicle_detail' vehicle.id %}" class="view-btn">
+    View Details
+</a>
+    </div>
+
+</div>
+
+{% empty %}
+    <p style="text-align:center; font-size:20px;">
+        No vehicles found.
+    </p>
+{% endfor %}
+
+    </div>
+
+    </div>
+
+</body>
+</html>
