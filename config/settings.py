@@ -27,8 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "khaimotors.onrender.com",
-    "localhost",
-    "127.0.0.1",
+    "khaimotors.co.uk",
+    "www.khaimotors.co.uk",
 ]
 
 # Application definition
