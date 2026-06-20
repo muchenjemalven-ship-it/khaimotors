@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-l(-rdaq(+=va*@)ajcdfq6@a-c_p!j7zum6qnlc-l5dq4xmjv6
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
     "khaimotors.onrender.com",
     "khaimotors.co.uk",
     "www.khaimotors.co.uk",
